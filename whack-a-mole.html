@@ -8,24 +8,31 @@
  <style>
     
     
-    html {
+  /*html {
   box-sizing: border-box;
   font-size: 10px;
   background: #ffc600;
       background-image: url(./img/landscape-152502_960_720.png);
     background-repeat: no-repeat;
     background-size: cover
-}
+}*/
 
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
 body {
+  box-sizing: border-box;
+  font-size: 10px;
+  background: #ffc600;
+  background-image: url(./img/landscape-152502_960_720.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
   padding: 0;
   margin:0;
   font-family: 'Amatic SC', cursive;
-  //background-image: url(./img/landscape-152502_960_720.png);
+  /*background-image: url(./img/landscape-152502_960_720.png);*/
 }
 
 h1 {
@@ -34,7 +41,17 @@ h1 {
   line-height:1;
   margin-bottom: 0;
 }
-
+     
+/*  h1 {
+    display: block;
+    font-size: 2em;
+    -webkit-margin-before: none;
+    -webkit-margin-after: none;
+    -webkit-margin-start: none;
+    -webkit-margin-end: none;
+    font-weight: bold;
+}
+*/
 .score {
   background:rgba(255,255,255,0.2);
   padding:0 3rem;
@@ -122,8 +139,10 @@ h1 {
     padding: 5px 0 0 0;
 }
     
-    
-    
+ .mybutton {
+     width: 155px;
+ }
+
 </style>
     
     
@@ -133,14 +152,14 @@ h1 {
 <div id="whole">
   <h1>Whack-a-mole! <span class="score">0</span></h1>
   
-  <button class="startGame" onClick="startGame()">Start Game!</button>
+  <button class="startGame mybutton" onClick="startGame()">Start Game!</button>
     
-  <button id="startB" class="startGame myScore" onClick="scoreGame()">Show Score!</button>
+  <button id="startB" class="startGame myScore mybutton" onClick="scoreGame()">Show Score!</button>
     
 <span id="hS" class="scoreC"></span>
 <span id="lS" class="scoreC"></span>
     
-    <button id="reset1" class="startGame myScore">reset</button>
+    <button id="reset1" class="startGame resetScore mybutton">reset</button>
       
 
   <div class="game">
@@ -280,15 +299,17 @@ h1 {
     }
     
     document.getElementById("reset1").addEventListener("click", function () {
-        if(!isNaN(highScore)) {
-            localStorage.removeItem("highMoleScore");
-            highScore = NaN;
-        }
-        document.getElementById("lS").innerHTML = "";
-        document.getElementById("hS").innerHTML = "";
-        toStop = true;
-        newResult = false;
-   })
+        if(confirm("Do you really want to reset the best score?\r\nNotice: You won't take it back!")) {
+            if(!isNaN(highScore)) {
+                localStorage.removeItem("highMoleScore");
+                highScore = NaN;
+            }
+            document.getElementById("lS").innerHTML = "";
+            document.getElementById("hS").innerHTML = "";
+            toStop = true;
+            newResult = false;
+            }
+   });
    
     
 
